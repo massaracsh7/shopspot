@@ -1,11 +1,17 @@
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Layout from '@/components/Layout';
+import MainPage from '@/pages/MainPage';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div>
-      <h1>ShopSpot</h1>
-    </div>
-  )
-}
+      <Router>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<MainPage />} />
+          </Route>
+        </Routes>
+      </Router>
+  );
+};
 
-export default App
+export default App;
