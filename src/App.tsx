@@ -2,8 +2,9 @@ import './App.css'
 
 function App() {
   return (
-    <>
-    </>
+    <div>
+      <h1>ShopSpot</h1>
+    </div>
   )
 }
 

@@ -7,13 +7,16 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,scss,md}'",
     "preview": "vite preview"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.4.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-redux": "^9.1.2"
+    "react-redux": "^9.1.2",
+    "sass": "^1.81.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",
