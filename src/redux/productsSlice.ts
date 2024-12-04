@@ -14,11 +14,15 @@ const initialState: ProductsState = {
   error: null,
 };
 
-
 const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
+    deleteProduct(state, action: PayloadAction<number>) {
+      state.products = state.products.filter(
+        (product) => product.id !== action.payload
+      );
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -43,4 +47,5 @@ const productsSlice = createSlice({
   },
 });
 
+export const { deleteProduct } = productsSlice.actions;
 export default productsSlice;

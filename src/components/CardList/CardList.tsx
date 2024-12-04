@@ -1,9 +1,15 @@
 import { useFetchProductsQuery } from "@/redux/shopSpotApi";
 import { Product } from "@/types/types";
 import CardItem from "../CardItem";
+import { RootState } from "@/redux/store";
+import { useSelector } from "react-redux";
 
 const CardsList: React.FC = () => {
-  const { data: products = [], isLoading, error } = useFetchProductsQuery();
+  const { isLoading, error } = useFetchProductsQuery();
+  const { products } = useSelector(
+    (state: RootState) => state.products
+  );
+
 
   return (
     <div>
@@ -11,7 +17,7 @@ const CardsList: React.FC = () => {
       {isLoading && <p>Loading ...</p>}
       <ul className="product-list">
         {products.map((product: Product) => (
-          <CardItem product={product}/>
+          <CardItem product={product} key={product.id} />
         ))}
       </ul>
     </div>
