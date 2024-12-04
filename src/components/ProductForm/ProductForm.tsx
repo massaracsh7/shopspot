@@ -10,7 +10,6 @@ import { Product } from '@/types/types';
 const ProductForm: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [errorImage, setErrorImage] = useState('');
 
   const schema = Yup.object().shape({
     title: Yup.string().required('Title is required'),
@@ -58,19 +57,11 @@ const ProductForm: React.FC = () => {
       <input className='form__input' id='category' {...register('category')} />
 
       <label>Upload Image URL </label>
-      {errorImage && <span className='form__error'>{errorImage}</span>}
+      {errors.image && <span className='form__error'>{errors.image.message}</span>}
       <input
         type='text'
         placeholder='https://example.com/image.jpg'
-        onChange={async (event) => {
-          const value = event.target.value;
-          if (value && !value.startsWith('http')) {
-            setErrorImage('Invalid URL format');
-          } else {
-            setErrorImage('');
-            setValue('image', value);
-          }
-        }}
+        className='form__input' id='image' {...register('image')}
       />
 
       <button className='form__btn' type='submit' disabled={!isValid}>
