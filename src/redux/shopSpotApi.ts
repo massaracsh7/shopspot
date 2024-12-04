@@ -9,9 +9,13 @@ export const shopSpotApi = createApi({
     fetchProducts: builder.query<Product[], void>({
       query: () => "/products",
     }),
-})
+    fetchProductById: builder.query<Product, number>({
+      query: (id) => `/products/${id}`,
+    }),
+  })
 });
 
 export const {
   useFetchProductsQuery,
+  useFetchProductByIdQuery,
 } = shopSpotApi;
