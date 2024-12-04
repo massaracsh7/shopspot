@@ -1,5 +1,6 @@
 import { useFetchProductsQuery } from "@/redux/shopSpotApi";
 import { Product } from "@/types/types";
+import CardItem from "../CardItem";
 
 const CardsList: React.FC = () => {
   const { data: products = [], isLoading, error } = useFetchProductsQuery();
@@ -8,17 +9,11 @@ const CardsList: React.FC = () => {
     <div>
       {error && <p>Error loading  data</p>}
       {isLoading && <p>Loading ...</p>}
-      <div className="product-list">
+      <ul className="product-list">
         {products.map((product: Product) => (
-          <div key={product.id} className="product-card">
-            <img src={product.image} alt={product.title} />
-            <h3>{product.title}</h3>
-            <p>{product.description.slice(0, 100)}...</p>
-            <button>❤</button>
-            <button>🗑</button>
-          </div>
+          <CardItem product={product}/>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };
