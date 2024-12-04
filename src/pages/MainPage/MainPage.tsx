@@ -1,5 +1,3 @@
-import CardsList from "@/components/CardList/CardList";
-
 const MainPage: React.FC = () => {
   return (
     <div className="container">

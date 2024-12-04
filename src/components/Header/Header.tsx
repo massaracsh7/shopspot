@@ -14,8 +14,13 @@ const Header: React.FC = () => {
               </Link>
             </li>
             <li>
-              <Link to={`/products`} aria-label="Main Page">
+              <Link to={`/products`} aria-label="Catalog Page">
                 Catalog
+              </Link>
+            </li>
+            <li>
+              <Link to={`/create-product`} aria-label="Create Product Page">
+                Create product
               </Link>
             </li>
           </ul>
