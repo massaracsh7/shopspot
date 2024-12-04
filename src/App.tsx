@@ -4,6 +4,7 @@ import MainPage from '@/pages/MainPage';
 import NotFound from './pages/NotFound';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
+import ProductPage from './pages/ProductPage';
 
 const App: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<MainPage />} />
+            <Route path="/products" element={<ProductPage />} />
           </Route>
         <Route path="*" element={<NotFound />} />
         </Routes>

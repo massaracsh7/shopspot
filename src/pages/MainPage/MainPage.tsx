@@ -1,11 +1,10 @@
 import CardsList from "@/components/CardList/CardList";
-import { useFetchProductsQuery } from "@/redux/shopSpotApi";
 
 const MainPage: React.FC = () => {
   return (
     <div className="container">
       <h1>MainPage</h1>
-      <CardsList/>
+      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae rem minima reiciendis odit laborum. Accusantium adipisci possimus eos doloribus, dolorem ad iusto suscipit deserunt ducimus nam non ipsum quidem modi.</p>
     </div>
   );
 };
