@@ -10,6 +10,7 @@ const CardsList: React.FC = () => {
   const { products } = useSelector(
     (state: RootState) => state.products
   );
+  console.log(products);
   const { favoriteProductIds } = useSelector((state: RootState) => state.favorites);
   const [showFavorites, setShowFavorites] = useState(false);
   const favorites = products.filter((item) => favoriteProductIds.some((id) => id === item.id));

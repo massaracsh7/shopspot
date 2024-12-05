@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { addProduct } from '@/redux/productsSlice';
+import { addProduct, editProduct } from '@/redux/productsSlice';
 import { Product } from '@/types/types';
 
-const ProductForm: React.FC = () => {
+interface ProductFormProps {
+  initialData?: Product; 
+}
+
+const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -29,12 +33,20 @@ const ProductForm: React.FC = () => {
     resolver: yupResolver(schema),
   });
 
+  useEffect(() => {
+    if (initialData) {
+      Object.entries(initialData).forEach(([key, value]) => {
+        setValue(key as keyof Omit<Product, 'id'>, value as string | number);
+      });
+    }
+  }, [initialData, setValue]);
+
   const onSubmit = (data: Omit<Product, 'id'>) => {
-    const newProduct: Product = {
-      ...data,
-      id: Date.now(),
-    };
-    dispatch(addProduct(newProduct));
+    if (initialData) {
+      dispatch(editProduct({ ...data, id: initialData.id }));
+    } else {
+      dispatch(addProduct({ ...data, id: Date.now() }));
+    }
     navigate('/', { replace: true });
   };
 
@@ -65,7 +77,7 @@ const ProductForm: React.FC = () => {
       />
 
       <button className='form__btn' type='submit' disabled={!isValid}>
-        Create Product
+        {initialData ? 'Update Product' : 'Create Product'}
       </button>
     </form>
   );

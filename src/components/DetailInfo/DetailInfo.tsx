@@ -1,12 +1,17 @@
 import { useFetchProductByIdQuery } from "@/redux/shopSpotApi";
+import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import { RootState } from "@/redux/store";
 
 const DetailInfo: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   if (id === undefined) {
     return <div>Invalid product ID</div>;
   }
-  const { data: product, isLoading, error } = useFetchProductByIdQuery(Number(id));
+  const { isLoading, error } = useFetchProductByIdQuery(Number(id));
+  const product = useSelector(
+    (state: RootState) => state.products.products.find(item => item.id === Number(id)));
+  
   if (!product) {
     return <div>Product not found</div>;
   }
