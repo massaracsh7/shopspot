@@ -26,6 +26,13 @@ export const shopSpotApi = createApi({
         body: data,
       }),
     }),
+    postProduct: builder.mutation<void, Omit<Product, 'id'>>({
+      query: (data) => ({
+        url: "/products",
+        method: "POST",
+        body: data,
+      }),
+    }),
     fetchCategories: builder.query<string[], void>({
       query: () => "/products/categories",
     }),
@@ -37,5 +44,6 @@ export const {
   useFetchProductByIdQuery,
   useDeleteProductByIdMutation,
   useFetchCategoriesQuery,
-  useUpdateProductMutation
+  useUpdateProductMutation,
+  usePostProductMutation,
 } = shopSpotApi;

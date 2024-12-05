@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProduct, editProduct } from '@/redux/productsSlice';
 import { Product } from '@/types/types';
-import { useUpdateProductMutation } from '@/redux/shopSpotApi';
+import { usePostProductMutation, useUpdateProductMutation } from '@/redux/shopSpotApi';
 import { RootState } from '@/redux/store';
 
 interface ProductFormProps {
@@ -17,6 +17,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [updateProduct] = useUpdateProductMutation();
+  const [postProduct] = usePostProductMutation();
   const { categories } = useSelector((state: RootState) => state.categories);
 
 
@@ -52,6 +53,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
       updateProduct({ id: initialData.id, data: { ...data } });
     } else {
       dispatch(addProduct({ ...data, id: Date.now() }));
+      postProduct({ ...data });
     }
     navigate('/', { replace: true });
   };

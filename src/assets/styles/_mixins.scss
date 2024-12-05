@@ -1,0 +1,30 @@
+@use './variables' as *;
+
+@mixin font($size, $height: 1.6, $weight: 400, $style: normal) {
+  font-size: $size;
+  line-height: $height;
+  font-weight: $weight;
+  font-style: $style;
+}
+
+@mixin transition($property, $duration: 0.3s, $easing: ease-in-out) {
+  transition: $property $duration $easing;
+}
+
+@mixin media-laptop {
+  @media (max-width: $xl-width) {
+    @content;
+  }
+}
+
+@mixin media-tablet {
+  @media (max-width: $lg-width) {
+    @content;
+  }
+}
+
+@mixin media-mobile {
+  @media (max-width: $m-width) {
+    @content;
+  }
+}

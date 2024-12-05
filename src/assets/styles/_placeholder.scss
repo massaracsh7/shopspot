@@ -1,0 +1,23 @@
+%font-primary {
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+%font-secondary {
+  font-family: 'Montserrat', Tahoma, sans-serif;
+}
+
+%main-shadow {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+%flex-space {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+%flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
