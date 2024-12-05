@@ -1,41 +1,35 @@
 import { useFetchProductsQuery } from "@/redux/shopSpotApi";
-import { Product } from "@/types/types";
-import CardItem from "../CardItem";
 import CardList from "../CardList";
 import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import { CategoryFilter } from "../Categories";
+import FiltersPanel from "../Categories/FiltersPanel";
+import styles from "./ProductList.module.scss";
+
 
 const CardsList: React.FC = () => {
   const { isLoading, error } = useFetchProductsQuery();
-  const { products } = useSelector(
-    (state: RootState) => state.products
-  );
-
+  const { products } = useSelector((state: RootState) => state.products);
   const { favoriteProductIds } = useSelector((state: RootState) => state.favorites);
+  const { selectedCategory } = useSelector((state: RootState) => state.categories);
+
   const [showFavorites, setShowFavorites] = useState(false);
-
-  const { selectedCategory } = useSelector(
-    (state: RootState) => state.categories
-  );
-
-  const filteredByCategory = selectedCategory
-    ? products.filter((product) => product.category === selectedCategory)
-    : products;
-
-  const favorites = products.filter((item) => favoriteProductIds.some((id) => id === item.id));
-  const filteredProducts = showFavorites ? favorites : filteredByCategory || [];
-
   const [page, setPage] = useState(1);
   const limit = 8;
 
-  const startIndex = (page - 1) * limit;
-  const endIndex = startIndex + limit;
-  const paginatedProducts = filteredProducts?.slice(startIndex, endIndex);
+  const filteredProducts = showFavorites
+    ? products.filter((item) => favoriteProductIds.includes(item.id))
+    : selectedCategory
+      ? products.filter((product) => product.category === selectedCategory)
+      : products;
+
+  const paginatedProducts = filteredProducts.slice(
+    (page - 1) * limit,
+    page * limit
+  );
 
   const handleNextPage = () => {
-    if (filteredProducts && page < Math.ceil(filteredProducts.length / limit)) {
+    if (page < Math.ceil(filteredProducts.length / limit)) {
       setPage(page + 1);
     }
   };
@@ -46,16 +40,11 @@ const CardsList: React.FC = () => {
     }
   };
 
-  const handleFilter = (show: boolean) => {
-    setPage(1);
-    setShowFavorites(show);
-  }
-
   return (
     <div>
       {error && <p>Error loading  data</p>}
       {isLoading && <p>Loading ...</p>}
-      <div className="filter">
+      {/* <div className="filter">
         <button onClick={() => handleFilter(false)} disabled={!showFavorites}>
           Show All
         </button>
@@ -63,17 +52,25 @@ const CardsList: React.FC = () => {
           Show Favorites
         </button>
       </div>
-      <CategoryFilter />
+      <CategoryFilter /> */}
+
+      <FiltersPanel
+        onToggleFavorites={setShowFavorites}
+        showFavorites={showFavorites}
+        onTogglePage={setPage}
+      />
+
 
       <CardList products={paginatedProducts} />
-      <div className="pagination">
+
+      <div className={styles.pagination}>
         <button onClick={handlePrevPage} disabled={page === 1}>
           Previous
         </button>
         <span>Page {page}</span>
         <button
           onClick={handleNextPage}
-          disabled={page >= Math.ceil(products.length / limit)}
+          disabled={page >= Math.ceil(filteredProducts.length / limit)}
         >
           Next
         </button>

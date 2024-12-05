@@ -1,0 +1,69 @@
+@use '@/assets/styles/variables' as *;
+@use '@/assets/styles/placeholder' as *;
+@use '@/assets/styles/mixins' as *;
+
+.filters-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.tabs button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #f0f0f0;
+  color: #333;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: normal;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.tabs button:hover {
+  background-color: #007bff;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.tabs button.active {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.categories button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #f8f8f8;
+  color: #333;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.categories button:hover {
+  background-color: #007bff;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.categories button.active {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}

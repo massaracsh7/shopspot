@@ -61,4 +61,9 @@
       }
     }
   }
+
+  &__item a.active {
+    color: $primary-color;
+    font-weight: bold;
+  }
 }

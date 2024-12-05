@@ -1,0 +1,15 @@
+@use '@/assets/styles/variables' as *;
+@use '@/assets/styles/placeholder' as *;
+
+.footer {
+  background-color: $secondary-color;
+  color: $white-color;
+  padding: 15px 30px;
+  text-align: center;
+
+  &__content {
+    @extend %flex-center;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
