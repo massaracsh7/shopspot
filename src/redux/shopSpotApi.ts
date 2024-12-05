@@ -19,6 +19,13 @@ export const shopSpotApi = createApi({
         method: "DELETE",
       }),
     }),
+    updateProduct: builder.mutation<Product, { id: number; data: Omit<Product, 'id'> }>({
+      query: ({ id, data }) => ({
+        url: `/products/${id}`,
+        method: "PUT",
+        body: data,
+      }),
+    }),
     fetchCategories: builder.query<string[], void>({
       query: () => "/products/categories",
     }),
@@ -29,5 +36,6 @@ export const {
   useFetchProductsQuery,
   useFetchProductByIdQuery,
   useDeleteProductByIdMutation,
-  useFetchCategoriesQuery
+  useFetchCategoriesQuery,
+  useUpdateProductMutation
 } = shopSpotApi;

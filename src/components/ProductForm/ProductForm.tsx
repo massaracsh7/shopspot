@@ -3,9 +3,11 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addProduct, editProduct } from '@/redux/productsSlice';
 import { Product } from '@/types/types';
+import { useUpdateProductMutation } from '@/redux/shopSpotApi';
+import { RootState } from '@/redux/store';
 
 interface ProductFormProps {
   initialData?: Product; 
@@ -14,6 +16,9 @@ interface ProductFormProps {
 const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [updateProduct] = useUpdateProductMutation();
+  const { categories } = useSelector((state: RootState) => state.categories);
+
 
   const schema = Yup.object().shape({
     title: Yup.string().required('Title is required'),
@@ -44,6 +49,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
   const onSubmit = (data: Omit<Product, 'id'>) => {
     if (initialData) {
       dispatch(editProduct({ ...data, id: initialData.id }));
+      updateProduct({ id: initialData.id, data: { ...data } });
     } else {
       dispatch(addProduct({ ...data, id: Date.now() }));
     }
@@ -66,7 +72,14 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
 
       <label htmlFor='category'>Category </label>
       {errors.category && <span className='form__error'>{errors.category.message}</span>}
-      <input className='form__input' id='category' {...register('category')} />
+      <select className='form__input' id='category' {...register('category')}>
+        <option value=''>Select a category</option>
+        {categories.map((category) => (
+          <option key={category} value={category}>
+            {category}
+          </option>
+        ))}
+      </select>
 
       <label>Upload Image URL </label>
       {errors.image && <span className='form__error'>{errors.image.message}</span>}
