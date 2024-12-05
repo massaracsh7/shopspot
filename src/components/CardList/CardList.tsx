@@ -4,21 +4,30 @@ import CardItem from "../CardItem";
 import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import { CategoryFilter } from "../Categories";
 
 const CardsList: React.FC = () => {
   const { isLoading, error } = useFetchProductsQuery();
   const { products } = useSelector(
     (state: RootState) => state.products
   );
-  console.log(products);
+
   const { favoriteProductIds } = useSelector((state: RootState) => state.favorites);
   const [showFavorites, setShowFavorites] = useState(false);
+
+  const { selectedCategory } = useSelector(
+    (state: RootState) => state.categories
+  );
+
+  const filteredByCategory = selectedCategory
+    ? products.filter((product) => product.category === selectedCategory)
+    : products;
+
   const favorites = products.filter((item) => favoriteProductIds.some((id) => id === item.id));
-  const filteredProducts = showFavorites ? favorites : products || [];
+  const filteredProducts = showFavorites ? favorites : filteredByCategory || [];
 
-
-  const [page, setPage] = useState(1); 
-  const limit = 5; 
+  const [page, setPage] = useState(1);
+  const limit = 5;
 
   const startIndex = (page - 1) * limit;
   const endIndex = startIndex + limit;
@@ -53,6 +62,7 @@ const CardsList: React.FC = () => {
           Show Favorites
         </button>
       </div>
+      <CategoryFilter />
       <ul className="product-list">
         {paginatedProducts?.map((product: Product) => (
           <CardItem product={product} key={product.id} />

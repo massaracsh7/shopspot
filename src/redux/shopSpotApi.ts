@@ -19,11 +19,15 @@ export const shopSpotApi = createApi({
         method: "DELETE",
       }),
     }),
+    fetchCategories: builder.query<string[], void>({
+      query: () => "/products/categories",
+    }),
   })
 });
 
 export const {
   useFetchProductsQuery,
   useFetchProductByIdQuery,
-  useDeleteProductByIdMutation
+  useDeleteProductByIdMutation,
+  useFetchCategoriesQuery
 } = shopSpotApi;

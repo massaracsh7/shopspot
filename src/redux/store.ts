@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import productsSlice from "./productsSlice";
 import { shopSpotApi } from "./shopSpotApi";
 import favoriteSlice from "./favoritesSlice";
+import categoriesSlice from "./categoriesSlice";
 
 export const store = configureStore({
   reducer: {
     products: productsSlice.reducer,
     favorites: favoriteSlice.reducer,
+    categories: categoriesSlice.reducer,
     [shopSpotApi.reducerPath]: shopSpotApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
