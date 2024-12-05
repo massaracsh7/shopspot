@@ -1,0 +1,13 @@
+@use '@/assets/styles/placeholder' as *;
+@use '@/assets/styles//mixins' as *;
+@use '@/assets/styles/variables' as *;
+
+.inner {
+  @extend %flex-space;
+  margin-bottom: 2rem;
+
+  @include media-laptop {
+    flex-direction: column;
+  }
+
+}

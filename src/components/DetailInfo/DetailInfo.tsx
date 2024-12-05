@@ -2,6 +2,7 @@ import { useFetchProductByIdQuery } from "@/redux/shopSpotApi";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { RootState } from "@/redux/store";
+import styles from './DetailInfo.module.scss';
 
 const DetailInfo: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -17,15 +18,14 @@ const DetailInfo: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className={styles.detail}>
       {error && <p>Error loading  data</p>}
       {isLoading && <p>Loading ...</p>}
-      <h2>{product.title}</h2>
+      <h2 className={styles.detail__title}>{product.title}</h2>
       <img src={product.image} alt={product.title} />
-      <h3>{product.title}</h3>
-      <p>{product.price}</p>
-      <p>{product.category}</p>
-      <p>{product.description}</p>
+      <p className={styles.detail__info}><b>Price: </b>{product.price} $</p>
+      <p className={styles.detail__info}><b>Category: </b>{product.category}</p>
+      <p className={styles.detail__info}>{product.description}</p>
       <button>❤</button>
       <button>🗑</button>
       <Link to="/">

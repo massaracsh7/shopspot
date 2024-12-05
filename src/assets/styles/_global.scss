@@ -99,3 +99,12 @@ body {
     max-width: 100%;
   }
 }
+
+.title {
+  @extend %font-secondary;
+  @include font(2rem);
+  text-align: center;
+  text-shadow:
+    2px 2px 0px rgba(0, 0, 0, 0.3),
+    4px 4px 0px rgba(0, 0, 0, 0.2);
+}

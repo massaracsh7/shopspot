@@ -1,0 +1,64 @@
+@use '@/assets/styles/variables' as *;
+@use '@/assets/styles/placeholder' as *;
+@use '@/assets/styles/mixins' as *;
+
+.header {
+  background-color: $secondary-color;
+  color: $white-color;
+  padding: 0.94rem 1.88rem;
+
+  &__title {
+    @extend %font-secondary;
+    @include font(2rem);
+    text-align: center;
+    text-shadow:
+      2px 2px 0px rgba(0, 0, 0, 0.3),
+      4px 4px 0px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.navigation {
+  @extend %flex-center;
+
+  &__list {
+    display: flex;
+    gap: 10rem;
+
+    @include media-mobile {
+      display: block;
+    }
+  }
+
+  &__item {
+    @extend %font-secondary;
+    @include font(1.2rem);
+    @include transition(color);
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    position: relative;
+    padding: 0.3125rem 0;
+
+    &:before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      width: 100%;
+      background-color: $primary-color;
+      transform: scaleX(0);
+      transform-origin: right;
+      @include transition(transform);
+    }
+
+    &:hover {
+      color: $primary-color;
+
+      &:before {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+    }
+  }
+}
