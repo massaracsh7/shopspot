@@ -1,5 +1,13 @@
+@use '@/assets/styles/variables' as *;
+@use '@/assets/styles/mixins' as *;
+
 .favorite {
   position: absolute;
   right: 10%;
   font-size: 1.5rem;
+  @include transition(transform);
+
+  &:hover {
+    transform: scale(1.2);
+  }
 }

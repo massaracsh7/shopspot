@@ -10,21 +10,12 @@ export interface ProductsState {
 }
 
 const loadFromLocalStorage = (): Product[] => {
-  try {
-    const items = localStorage.getItem('products');
-    return items ? JSON.parse(items) : [];
-  } catch (e) {
-    console.error('Could not load state from localStorage', e);
-    return [];
-  }
+  const items = localStorage.getItem('products');
+  return items ? JSON.parse(items) : [];
 };
 
 const saveToLocalStorage = (products: Product[]) => {
-  try {
-    localStorage.setItem('products', JSON.stringify(products));
-  } catch (e) {
-    console.error('Could not save state to localStorage', e);
-  }
+  localStorage.setItem('products', JSON.stringify(products));
 };
 
 const initialState: ProductsState = {

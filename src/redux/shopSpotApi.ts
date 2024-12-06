@@ -1,6 +1,6 @@
+import { API_URL } from '@/constants';
 import { Product } from '@/types/types';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-const API_URL = 'https://fakestoreapi.com';
 
 export const shopSpotApi = createApi({
   reducerPath: 'shopSpotApi',

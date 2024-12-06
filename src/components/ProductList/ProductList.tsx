@@ -1,47 +1,45 @@
-import CardList from '../CardList';
-import { RootState } from '@/redux/store';
+import React, { useState, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
-import FiltersPanel from '../Categories/FiltersPanel';
+import { RootState } from '@/redux/store';
+import CardList from '../CardList';
+import FiltersPanel from '../Filters/FiltersPanel';
 import styles from './ProductList.module.scss';
 import { PaginationButton } from '../Buttons';
 import Loader from '../Loader';
 
 const ProductList: React.FC = () => {
-  const { products, loading, error } = useSelector(
-    (state: RootState) => state.products,
-  );
-  const { favoriteProductIds } = useSelector(
-    (state: RootState) => state.favorites,
-  );
-  const { selectedCategory } = useSelector(
-    (state: RootState) => state.categories,
-  );
+  const { products, loading, error } = useSelector((state: RootState) => state.products);
+  const { favoriteProductIds } = useSelector((state: RootState) => state.favorites);
+  const { selectedCategory } = useSelector((state: RootState) => state.categories);
 
   const [showFavorites, setShowFavorites] = useState(false);
   const [page, setPage] = useState(1);
   const limit = 8;
 
-  const filteredProducts = showFavorites
-    ? products.filter((item) => favoriteProductIds.includes(item.id))
-    : selectedCategory
-      ? products.filter((product) => product.category === selectedCategory)
-      : products;
+  const filteredProducts = useMemo(() => {
+    if (showFavorites) {
+      return products.filter((item) => favoriteProductIds.includes(item.id));
+    }
+    if (selectedCategory) {
+      return products.filter((product) => product.category === selectedCategory);
+    }
+    return products;
+  }, [products, showFavorites, favoriteProductIds, selectedCategory]);
 
-  const paginatedProducts = filteredProducts.slice(
-    (page - 1) * limit,
-    page * limit,
-  );
+  const totalPages = Math.ceil(filteredProducts.length / limit);
+  const paginatedProducts = useMemo(() => {
+    return filteredProducts.slice((page - 1) * limit, page * limit);
+  }, [filteredProducts, page, limit]);
 
   const handleNextPage = () => {
-    if (page < Math.ceil(filteredProducts.length / limit)) {
-      setPage(page + 1);
+    if (page < totalPages) {
+      setPage((prev) => prev + 1);
     }
   };
 
   const handlePrevPage = () => {
     if (page > 1) {
-      setPage(page - 1);
+      setPage((prev) => prev - 1);
     }
   };
 
@@ -62,11 +60,11 @@ const ProductList: React.FC = () => {
           disabled={page === 1}
           ariaLabel="Previous Page"
         />
-        <span>Page {page}</span>
+        <span>Page {page} of {totalPages}</span>
         <PaginationButton
           label="Next"
           onClick={handleNextPage}
-          disabled={page >= Math.ceil(filteredProducts.length / limit)}
+          disabled={page >= totalPages}
           ariaLabel="Next Page"
         />
       </div>
