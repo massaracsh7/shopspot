@@ -1,11 +1,18 @@
 import { useFetchProductByIdQuery } from "@/redux/shopSpotApi";
-import { useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { RootState } from "@/redux/store";
 import styles from './DetailInfo.module.scss';
+import { LinkButton } from '@/components/Buttons';
+import { toggleFavorite } from "@/redux/favoritesSlice";
+import { FavoriteButton } from "../Buttons";
+
 
 const DetailInfo: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const dispatch = useDispatch();
+  const favoriteProductIds = useSelector((state: RootState) => state.favorites.favoriteProductIds);
+  const isFavorite = favoriteProductIds.includes(Number(id));
   if (id === undefined) {
     return <div>Invalid product ID</div>;
   }
@@ -17,6 +24,11 @@ const DetailInfo: React.FC = () => {
     return <div>Product not found</div>;
   }
 
+  const handleToggleFavorite = () => {
+    dispatch(toggleFavorite(product.id));
+  };
+
+
   return (
     <div className={styles.detail}>
       {error && <p>Error loading  data</p>}
@@ -26,11 +38,11 @@ const DetailInfo: React.FC = () => {
       <p className={styles.detail__info}><b>Price: </b>{product.price} $</p>
       <p className={styles.detail__info}><b>Category: </b>{product.category}</p>
       <p className={styles.detail__info}>{product.description}</p>
-      <button>❤</button>
-      <button>🗑</button>
-      <Link to="/">
-        <button>Go to Home</button>
-      </Link>
+      <FavoriteButton
+        isFavorite={isFavorite}
+        onToggle={handleToggleFavorite}
+      />
+      <LinkButton label="Go Home" to="/" />
     </div>
   );
 };

@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import FiltersPanel from "../Categories/FiltersPanel";
 import styles from "./ProductList.module.scss";
+import { PaginationButton } from "../Buttons";
 
 
 const CardsList: React.FC = () => {
@@ -44,36 +45,26 @@ const CardsList: React.FC = () => {
     <div>
       {error && <p>Error loading  data</p>}
       {isLoading && <p>Loading ...</p>}
-      {/* <div className="filter">
-        <button onClick={() => handleFilter(false)} disabled={!showFavorites}>
-          Show All
-        </button>
-        <button onClick={() => handleFilter(true)} disabled={showFavorites}>
-          Show Favorites
-        </button>
-      </div>
-      <CategoryFilter /> */}
-
       <FiltersPanel
         onToggleFavorites={setShowFavorites}
         showFavorites={showFavorites}
         onTogglePage={setPage}
       />
-
-
       <CardList products={paginatedProducts} />
-
       <div className={styles.pagination}>
-        <button onClick={handlePrevPage} disabled={page === 1}>
-          Previous
-        </button>
+        <PaginationButton
+          label="Previous"
+          onClick={handlePrevPage}
+          disabled={page === 1}
+          ariaLabel="Previous Page"
+        />
         <span>Page {page}</span>
-        <button
+        <PaginationButton
+          label="Next"
           onClick={handleNextPage}
           disabled={page >= Math.ceil(filteredProducts.length / limit)}
-        >
-          Next
-        </button>
+          ariaLabel="Next Page"
+        />
       </div>
     </div>
   );

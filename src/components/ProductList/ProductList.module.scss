@@ -5,30 +5,3 @@
   gap: 0.5rem;
   margin-top: 1rem;
 }
-
-.pagination button {
-  padding: 0.5rem 0.8rem;
-  border: none;
-  background-color: #f0f0f0;
-  color: #333;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-.pagination button:disabled {
-  background-color: #ccc;
-  color: #888;
-  cursor: not-allowed;
-}
-
-.pagination button:hover:not(:disabled) {
-  background-color: #007bff;
-  color: white;
-  transform: translateY(-2px);
-}
-
-.pagination span {
-  font-weight: bold;
-  color: #555;
-}

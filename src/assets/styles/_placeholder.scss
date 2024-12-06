@@ -30,8 +30,8 @@
   color: $text-color;
   cursor: pointer;
   border-radius: 4px;
-  transition: background-color 0.3s, transform 0.2s;
   border: 2px solid $border-color;
+  transition: color 0.3s, background-color 0.3s, transform 0.2s;
 
   &:hover {
     background-color: $secondary-color;
@@ -43,5 +43,20 @@
     background-color: $secondary-color;
     font-weight: bold;
     color: $white-color;
+  }
+}
+
+%button-main {
+  @extend %button-common;
+  background-color: $primary-color;
+  color: $white-color;
+  border: none;
+  padding: $padding-medium $padding-large;
+  font-size: $font-size-medium;
+  font-weight: bold;
+  text-transform: uppercase;
+
+  &:hover {
+    background-color: #bf5102;
   }
 }

@@ -24,7 +24,11 @@
     display: flex;
     gap: 10rem;
 
-    @include media-mobile {
+    @include media-laptop {
+      gap: 5rem;
+    }
+
+    @include media-tablet {
       display: block;
     }
   }
@@ -59,6 +63,18 @@
         transform: scaleX(1);
         transform-origin: left;
       }
+    }
+
+    @include media-laptop {
+      font-size: 1rem;
+    }
+
+    @include media-tablet {
+      font-size: 0.9rem; 
+    }
+
+    @include media-mobile {
+      font-size: 0.8rem;
     }
   }
 
