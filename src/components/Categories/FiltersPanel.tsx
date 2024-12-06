@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import styles from "./FiltersPanel.module.scss";
 import { clearCategory, selectCategory } from "@/redux/categoriesSlice";
-import CategoryLoader from "./CategoryLoader";
+import CategoryLoader from "../../utils/CategoryLoader";
 
 const FiltersPanel = ({
   onToggleFavorites,
@@ -50,7 +50,6 @@ const FiltersPanel = ({
         </button>
       </div>
 
-      <CategoryLoader />
       <div className={styles.filters__categories}>
         <button
           onClick={() => handleCategorySelect(null)}

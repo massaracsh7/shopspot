@@ -3,8 +3,7 @@ import ProductForm from "@/components/ProductForm";
 const CreateProductPage: React.FC = () => {
   return (
     <div className="container">
-      <h1>CreateProductPage</h1>
-      <p>Create your own product and add it to the catalog</p>
+      <h1 className="title">Create your own product</h1>
       <ProductForm />
     </div>
   );

@@ -4,8 +4,17 @@ export interface FavoritesState {
   favoriteProductIds: number[];
 }
 
+const loadFavorites = (): number[] => {
+  const faves = localStorage.getItem('favoriteProducts');
+  return faves ? JSON.parse(faves) : [];
+};
+
+const saveFavorites = (favorites: number[]) => {
+  localStorage.setItem('favoriteProducts', JSON.stringify(favorites));
+};
+
 const initialState: FavoritesState = {
-  favoriteProductIds: [],
+  favoriteProductIds: loadFavorites(),
 };
 
 const favoritesSlice = createSlice({
@@ -20,6 +29,7 @@ const favoritesSlice = createSlice({
       } else {
         state.favoriteProductIds.splice(index, 1);
       }
+      saveFavorites(state.favoriteProductIds);
     },
   },
 });

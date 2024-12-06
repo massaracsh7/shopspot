@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProduct, editProduct } from '@/redux/productsSlice';
 import { Product } from '@/types/types';
 import { usePostProductMutation, useUpdateProductMutation } from '@/redux/shopSpotApi';
 import { RootState } from '@/redux/store';
 import style from './ProductForm.module.scss';
-import { CategoryLoader } from '../Categories';
+import { schema } from '@/utils';
 
 interface ProductFormProps {
   initialData?: Product; 
@@ -21,15 +20,6 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
   const [updateProduct] = useUpdateProductMutation();
   const [postProduct] = usePostProductMutation();
   const { categories } = useSelector((state: RootState) => state.categories);
-
-
-  const schema = Yup.object().shape({
-    title: Yup.string().required('Title is required'),
-    price: Yup.number().required('Price is required').positive('Price must be positive'),
-    description: Yup.string().required('Description is required'),
-    category: Yup.string().required('Category is required'),
-    image: Yup.string().url('Invalid URL format').required('Image URL is required'),
-  });
 
   const {
     register,
@@ -75,7 +65,6 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
       <textarea className={style.form__input} id='description' {...register('description')} />
 
       <label htmlFor='category'>Category </label>
-      <CategoryLoader />
       {errors.category && <span className={style.form__error}>{errors.category.message}</span>}
       <select className={style.form__input} id='category' {...register('category')}>
         <option value=''>Select a category</option>

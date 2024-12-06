@@ -9,8 +9,7 @@ import { PaginationButton } from "../Buttons";
 
 
 const CardsList: React.FC = () => {
-  const { isLoading, error } = useFetchProductsQuery();
-  const { products } = useSelector((state: RootState) => state.products);
+  const { products, loading, error } = useSelector((state: RootState) => state.products);
   const { favoriteProductIds } = useSelector((state: RootState) => state.favorites);
   const { selectedCategory } = useSelector((state: RootState) => state.categories);
 
@@ -44,7 +43,7 @@ const CardsList: React.FC = () => {
   return (
     <div>
       {error && <p>Error loading  data</p>}
-      {isLoading && <p>Loading ...</p>}
+      {loading && <p>Loading ...</p>}
       <FiltersPanel
         onToggleFavorites={setShowFavorites}
         showFavorites={showFavorites}
