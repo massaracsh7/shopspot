@@ -9,12 +9,14 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,scss,md}'",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
     "@reduxjs/toolkit": "^2.4.0",
     "framer-motion": "^11.13.1",
+    "gh-pages": "^6.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.2",

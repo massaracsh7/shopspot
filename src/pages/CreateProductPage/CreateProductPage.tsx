@@ -1,4 +1,4 @@
-import ProductForm from "@/components/ProductForm";
+import ProductForm from '@/components/ProductForm';
 
 const CreateProductPage: React.FC = () => {
   return (

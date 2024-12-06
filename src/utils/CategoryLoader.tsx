@@ -1,4 +1,4 @@
-import { useFetchCategoriesQuery } from "@/redux/shopSpotApi";
+import { useFetchCategoriesQuery } from '@/redux/shopSpotApi';
 
 const CategoryLoader = () => {
   const { isLoading, error } = useFetchCategoriesQuery();

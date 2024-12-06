@@ -38,7 +38,9 @@
     font-size: 1rem;
     border: 1px solid $border-color;
     border-radius: $border-radius;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition:
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
 
     &:hover {
       border-color: $primary-color;
@@ -76,7 +78,9 @@
     border: none;
     border-radius: $border-radius;
     cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition:
+      background-color 0.3s ease,
+      box-shadow 0.3s ease;
 
     &:hover {
       background-color: ($primary-color, 20%);

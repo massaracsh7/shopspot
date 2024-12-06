@@ -1,13 +1,13 @@
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
-import styles from "./FiltersPanel.module.scss";
-import { clearCategory, selectCategory } from "@/redux/categoriesSlice";
-import CategoryLoader from "../../utils/CategoryLoader";
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
+import styles from './FiltersPanel.module.scss';
+import { clearCategory, selectCategory } from '@/redux/categoriesSlice';
+import CategoryLoader from '../../utils/CategoryLoader';
 
 const FiltersPanel = ({
   onToggleFavorites,
   showFavorites,
-  onTogglePage
+  onTogglePage,
 }: {
   onToggleFavorites: (show: boolean) => void;
   showFavorites: boolean;
@@ -15,7 +15,7 @@ const FiltersPanel = ({
 }) => {
   const dispatch = useDispatch();
   const { categories, selectedCategory } = useSelector(
-    (state: RootState) => state.categories
+    (state: RootState) => state.categories,
   );
 
   const handleCategorySelect = (category: string | null) => {
@@ -31,20 +31,20 @@ const FiltersPanel = ({
   const handleTabs = (show: boolean) => {
     onToggleFavorites(show);
     onTogglePage(1);
-  }
+  };
 
   return (
     <div className={styles.filters}>
       <div className={styles.filters__tabs}>
         <button
           onClick={() => handleTabs(false)}
-          className={!showFavorites ? styles.active : ""}
+          className={!showFavorites ? styles.active : ''}
         >
           All Products
         </button>
         <button
           onClick={() => handleTabs(true)}
-          className={showFavorites ? styles.active : ""}
+          className={showFavorites ? styles.active : ''}
         >
           Favorites
         </button>
@@ -53,7 +53,7 @@ const FiltersPanel = ({
       <div className={styles.filters__categories}>
         <button
           onClick={() => handleCategorySelect(null)}
-          className={!selectedCategory ? styles.active : ""}
+          className={!selectedCategory ? styles.active : ''}
         >
           All Categories
         </button>
@@ -61,7 +61,7 @@ const FiltersPanel = ({
           <button
             key={category}
             onClick={() => handleCategorySelect(category)}
-            className={selectedCategory === category ? styles.active : ""}
+            className={selectedCategory === category ? styles.active : ''}
           >
             {category}
           </button>

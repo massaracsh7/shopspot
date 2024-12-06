@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface FavoritesState {
   favoriteProductIds: number[];
@@ -18,7 +18,7 @@ const initialState: FavoritesState = {
 };
 
 const favoritesSlice = createSlice({
-  name: "favorites",
+  name: 'favorites',
   initialState,
   reducers: {
     toggleFavorite(state, action: PayloadAction<number>) {

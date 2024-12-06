@@ -1,18 +1,22 @@
-import { useFetchProductsQuery } from "@/redux/shopSpotApi";
-import CardList from "../CardList";
-import { RootState } from "@/redux/store";
-import { useSelector } from "react-redux";
-import { useState } from "react";
-import FiltersPanel from "../Categories/FiltersPanel";
-import styles from "./ProductList.module.scss";
-import { PaginationButton } from "../Buttons";
-import Loader from "../Loader";
+import CardList from '../CardList';
+import { RootState } from '@/redux/store';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import FiltersPanel from '../Categories/FiltersPanel';
+import styles from './ProductList.module.scss';
+import { PaginationButton } from '../Buttons';
+import Loader from '../Loader';
 
-
-const CardsList: React.FC = () => {
-  const { products, loading, error } = useSelector((state: RootState) => state.products);
-  const { favoriteProductIds } = useSelector((state: RootState) => state.favorites);
-  const { selectedCategory } = useSelector((state: RootState) => state.categories);
+const ProductList: React.FC = () => {
+  const { products, loading, error } = useSelector(
+    (state: RootState) => state.products,
+  );
+  const { favoriteProductIds } = useSelector(
+    (state: RootState) => state.favorites,
+  );
+  const { selectedCategory } = useSelector(
+    (state: RootState) => state.categories,
+  );
 
   const [showFavorites, setShowFavorites] = useState(false);
   const [page, setPage] = useState(1);
@@ -26,7 +30,7 @@ const CardsList: React.FC = () => {
 
   const paginatedProducts = filteredProducts.slice(
     (page - 1) * limit,
-    page * limit
+    page * limit,
   );
 
   const handleNextPage = () => {
@@ -43,7 +47,7 @@ const CardsList: React.FC = () => {
 
   return (
     <div>
-      {error && <p>Error loading  data</p>}
+      {error && <p>Error loading data</p>}
       {loading && <Loader isLoading={true} height="40%" width="40%" />}
       <FiltersPanel
         onToggleFavorites={setShowFavorites}
@@ -70,4 +74,4 @@ const CardsList: React.FC = () => {
   );
 };
 
-export default CardsList;
+export default ProductList;

@@ -1,21 +1,19 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useFetchProductsQuery } from "@/redux/shopSpotApi";
-import { initializeProducts } from "@/redux/productsSlice";
-import { RootState } from "@/redux/store";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useFetchProductsQuery } from '@/redux/shopSpotApi';
+import { initializeProducts } from '@/redux/productsSlice';
+import { RootState } from '@/redux/store';
 
 const ProductsLoader: React.FC = () => {
   const dispatch = useDispatch();
-  const isInitialized = useSelector(
-    (state: RootState) => state.products.isInitialized
-  );
+  const isInit = useSelector((state: RootState) => state.products.isInit);
   const { data, isSuccess } = useFetchProductsQuery();
 
   useEffect(() => {
-    if (!isInitialized && isSuccess && data) {
+    if (!isInit && isSuccess && data) {
       dispatch(initializeProducts(data));
     }
-  }, [isInitialized, isSuccess, data, dispatch]);
+  }, [isInit, isSuccess, data, dispatch]);
 
   return null;
 };

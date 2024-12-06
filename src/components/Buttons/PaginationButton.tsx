@@ -8,7 +8,12 @@ interface PaginationButtonProps {
   ariaLabel: string;
 }
 
-const PaginationButton: React.FC<PaginationButtonProps> = ({ label, onClick, disabled, ariaLabel }) => {
+const PaginationButton: React.FC<PaginationButtonProps> = ({
+  label,
+  onClick,
+  disabled,
+  ariaLabel,
+}) => {
   return (
     <button
       className={styles.pagebutton}

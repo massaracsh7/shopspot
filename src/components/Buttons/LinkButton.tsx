@@ -11,10 +11,7 @@ const LinkButton: React.FC<LinkButton> = ({ label, to }) => {
   const navigate = useNavigate();
 
   return (
-    <button
-      className={styles.linkBtn}
-      onClick={() => navigate(to)}
-    >
+    <button className={styles.linkBtn} onClick={() => navigate(to)}>
       {label}
     </button>
   );

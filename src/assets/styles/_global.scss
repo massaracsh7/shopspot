@@ -94,7 +94,6 @@ body {
     max-width: 720px;
   }
 
-
   @include media-mobile {
     max-width: 100%;
   }
@@ -110,8 +109,21 @@ body {
 }
 
 .title {
-  font-size: 3rem;
-  font-weight: bold;
+  @include font(3rem, 1.6, 600);
   color: $secondary-color;
   margin-bottom: 20px;
+
+  @include media-laptop {
+    @include font(2.5rem);
+    margin-bottom: 16px;
+  }
+
+  @include media-tablet {
+    @include font(2rem);
+    margin-bottom: 12px;
+  }
+
+  @include media-mobile {
+    @include font(1.5rem);
+  }
 }

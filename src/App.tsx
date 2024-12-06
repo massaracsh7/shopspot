@@ -19,7 +19,7 @@ const App: React.FC = () => {
             <Route path="/products/:id" element={<DetailPage />} />
             <Route path="/create-product" element={<CreateProductPage />} />
           </Route>
-        <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </Provider>

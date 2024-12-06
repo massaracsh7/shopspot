@@ -5,16 +5,15 @@ import styles from './Layout.module.scss';
 import { CategoryLoader, ProductsLoader } from '@/utils';
 
 const Layout: React.FC = () => {
-
   return (
     <div className={styles.layout}>
-      <Header/>
+      <Header />
       <ProductsLoader />
       <CategoryLoader />
       <main className={styles.content}>
         <Outlet />
       </main>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

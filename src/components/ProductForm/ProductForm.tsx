@@ -5,17 +5,23 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProduct, editProduct } from '@/redux/productsSlice';
 import { Product } from '@/types/types';
-import { usePostProductMutation, useUpdateProductMutation } from '@/redux/shopSpotApi';
+import {
+  usePostProductMutation,
+  useUpdateProductMutation,
+} from '@/redux/shopSpotApi';
 import { RootState } from '@/redux/store';
 import style from './ProductForm.module.scss';
 import { schema } from '@/utils';
 
 interface ProductFormProps {
-  initialData?: Product; 
+  initialData?: Product;
   closeModal?: () => void;
 }
 
-const ProductForm: React.FC<ProductFormProps> = ({ initialData, closeModal }) => {
+const ProductForm: React.FC<ProductFormProps> = ({
+  initialData,
+  closeModal,
+}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [updateProduct] = useUpdateProductMutation();
@@ -54,22 +60,43 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData, closeModal }) =>
 
   return (
     <form className={style.form} onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor='title'>Title </label>
-      {errors.title && <span className={style.form__error}>{errors.title.message}</span>}
-      <input className={style.form__input} id='title' {...register('title')} />
+      <label htmlFor="title">Title </label>
+      {errors.title && (
+        <span className={style.form__error}>{errors.title.message}</span>
+      )}
+      <input className={style.form__input} id="title" {...register('title')} />
 
-      <label htmlFor='price'>Price </label>
-      {errors.price && <span className={style.form__error}>{errors.price.message}</span>}
-      <input className={style.form__input} id='price' {...register('price')} type='number' />
+      <label htmlFor="price">Price </label>
+      {errors.price && (
+        <span className={style.form__error}>{errors.price.message}</span>
+      )}
+      <input
+        className={style.form__input}
+        id="price"
+        {...register('price')}
+        type="number"
+      />
 
-      <label htmlFor='description'>Description </label>
-      {errors.description && <span className={style.form__error}>{errors.description.message}</span>}
-      <textarea className={style.form__input} id='description' {...register('description')} />
+      <label htmlFor="description">Description </label>
+      {errors.description && (
+        <span className={style.form__error}>{errors.description.message}</span>
+      )}
+      <textarea
+        className={style.form__input}
+        id="description"
+        {...register('description')}
+      />
 
-      <label htmlFor='category'>Category </label>
-      {errors.category && <span className={style.form__error}>{errors.category.message}</span>}
-      <select className={style.form__input} id='category' {...register('category')}>
-        <option value=''>Select a category</option>
+      <label htmlFor="category">Category </label>
+      {errors.category && (
+        <span className={style.form__error}>{errors.category.message}</span>
+      )}
+      <select
+        className={style.form__input}
+        id="category"
+        {...register('category')}
+      >
+        <option value="">Select a category</option>
         {categories.map((category) => (
           <option key={category} value={category}>
             {category}
@@ -78,14 +105,18 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData, closeModal }) =>
       </select>
 
       <label>Upload Image URL </label>
-      {errors.image && <span className={style.form__error}>{errors.image.message}</span>}
+      {errors.image && (
+        <span className={style.form__error}>{errors.image.message}</span>
+      )}
       <input
-        type='text'
-        placeholder='https://example.com/image.jpg'
-        className={style.form__input} id='image' {...register('image')}
+        type="text"
+        placeholder="https://example.com/image.jpg"
+        className={style.form__input}
+        id="image"
+        {...register('image')}
       />
 
-      <button className={style.form__btn}  type='submit' disabled={!isValid}>
+      <button className={style.form__btn} type="submit" disabled={!isValid}>
         {initialData ? 'Update Product' : 'Create Product'}
       </button>
     </form>

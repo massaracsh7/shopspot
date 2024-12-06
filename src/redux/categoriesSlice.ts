@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { shopSpotApi } from "./shopSpotApi";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { shopSpotApi } from './shopSpotApi';
 
 interface CategoriesState {
   categories: string[];
@@ -12,7 +12,7 @@ const initialState: CategoriesState = {
 };
 
 const categoriesSlice = createSlice({
-  name: "categories",
+  name: 'categories',
   initialState,
   reducers: {
     selectCategory(state, action: PayloadAction<string>) {
@@ -27,7 +27,7 @@ const categoriesSlice = createSlice({
       shopSpotApi.endpoints.fetchCategories.matchFulfilled,
       (state, { payload }) => {
         state.categories = payload;
-      }
+      },
     );
   },
 });
