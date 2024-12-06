@@ -34,9 +34,8 @@ const FiltersPanel = ({
   }
 
   return (
-    <div className={styles["filters-panel"]}>
-      {/* Tabs for All/Favorites */}
-      <div className={styles.tabs}>
+    <div className={styles.filters}>
+      <div className={styles.filters__tabs}>
         <button
           onClick={() => handleTabs(false)}
           className={!showFavorites ? styles.active : ""}
@@ -51,9 +50,8 @@ const FiltersPanel = ({
         </button>
       </div>
 
-      {/* Categories */}
       <CategoryLoader />
-      <div className={styles.categories}>
+      <div className={styles.filters__categories}>
         <button
           onClick={() => handleCategorySelect(null)}
           className={!selectedCategory ? styles.active : ""}

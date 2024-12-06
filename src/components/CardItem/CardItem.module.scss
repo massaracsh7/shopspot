@@ -42,9 +42,14 @@
   }
 
   &__image {
-      margin: 0 auto;
-      border-radius: 0.5rem;
-      margin-bottom: 0.625rem;
-      object-fit: contain;
-    }
+    margin: 0 auto;
+    border-radius: 0.5rem;
+    margin-bottom: 0.625rem;
+    object-fit: contain;
+  }
+
+  &__btns {
+    width: 100%;
+    @extend %flex-space;
+  }
 }

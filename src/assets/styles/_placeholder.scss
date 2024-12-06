@@ -1,3 +1,5 @@
+@use './variables' as *;
+
 %font-primary {
   font-family: 'Roboto', Arial, sans-serif;
 }
@@ -20,4 +22,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+%button-common {
+  padding: $padding-small $padding-medium;
+  background-color: $light-bg;
+  color: $text-color;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s, transform 0.2s;
+  border: 2px solid $border-color;
+
+  &:hover {
+    background-color: $secondary-color;
+    color: $white-color;
+    transform: translateY(-2px);
+  }
+
+  &.active {
+    background-color: $secondary-color;
+    font-weight: bold;
+    color: $white-color;
+  }
 }
