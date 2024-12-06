@@ -53,3 +53,12 @@
     @extend %flex-space;
   }
 }
+
+.modal {
+  position: relative;
+  &>button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+}

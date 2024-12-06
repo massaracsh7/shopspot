@@ -12,9 +12,10 @@ import { schema } from '@/utils';
 
 interface ProductFormProps {
   initialData?: Product; 
+  closeModal?: () => void;
 }
 
-const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
+const ProductForm: React.FC<ProductFormProps> = ({ initialData, closeModal }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [updateProduct] = useUpdateProductMutation();
@@ -40,9 +41,10 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
   }, [initialData, setValue]);
 
   const onSubmit = (data: Omit<Product, 'id'>) => {
-    if (initialData) {
+    if (initialData && closeModal) {
       dispatch(editProduct({ ...data, id: initialData.id }));
       updateProduct({ id: initialData.id, data: { ...data } });
+      closeModal();
     } else {
       dispatch(addProduct({ ...data, id: Date.now() }));
       postProduct({ ...data });

@@ -6,6 +6,7 @@ import styles from './DetailInfo.module.scss';
 import { LinkButton } from '@/components/Buttons';
 import { toggleFavorite } from "@/redux/favoritesSlice";
 import { FavoriteButton } from "../Buttons";
+import Loader from "../Loader";
 
 
 const DetailInfo: React.FC = () => {
@@ -32,7 +33,7 @@ const DetailInfo: React.FC = () => {
   return (
     <div className={styles.detail}>
       {error && <p>Error loading  data</p>}
-      {isLoading && <p>Loading ...</p>}
+      {isLoading && <Loader isLoading={true} height="40%" width="40%" />}
       <h2 className={styles.detail__title}>{product.title}</h2>
       <img src={product.image} alt={product.title} />
       <p className={styles.detail__info}><b>Price: </b>{product.price} $</p>

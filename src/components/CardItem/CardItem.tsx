@@ -3,7 +3,7 @@ import { RootState } from "@/redux/store";
 import { Product } from "@/types/types";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { FaPen, FaRegTrashAlt } from 'react-icons/fa';
+import { FaPen, FaRegTrashAlt, FaRegWindowClose } from 'react-icons/fa';
 import { useDeleteProductByIdMutation } from "@/redux/shopSpotApi";
 import { deleteProduct } from "@/redux/productsSlice";
 import { useState } from "react";
@@ -36,16 +36,19 @@ const CardItem: React.FC<CardItemProps> = ({ product }) => {
     dispatch(toggleFavorite(product.id));
   };
 
-  const handleEditProduct = () => {
-    setModal(!modal);
+  const handleEditOpen = () => {
+    setModal(true);
+  };
+  const handleEditClose = () => {
+    setModal(false);
   };
 
   return (
     <>
       {modal ? (
-        <div className="modal">
-          <ProductForm initialData={product} />
-          <button onClick={handleEditProduct}>Close</button>
+        <div className={styles.modal}>
+          <IconButton icon={FaRegWindowClose} label="" onClick={handleEditClose} />
+          <ProductForm initialData={product} closeModal={handleEditClose} />
         </div>
       ) : (
         <li className={styles.card} >
@@ -59,7 +62,7 @@ const CardItem: React.FC<CardItemProps> = ({ product }) => {
             onToggle={handleToggleFavorite}
           />
           <div className={styles.card__btns}><IconButton icon={FaRegTrashAlt} label="Delete" onClick={handleDeleteProduct} />
-              <IconButton icon={FaPen} label="Edit" onClick={handleEditProduct} /></div>
+              <IconButton icon={FaPen} label="Edit" onClick={handleEditOpen} /></div>
 
         </li>
       )}

@@ -6,6 +6,7 @@ import { useState } from "react";
 import FiltersPanel from "../Categories/FiltersPanel";
 import styles from "./ProductList.module.scss";
 import { PaginationButton } from "../Buttons";
+import Loader from "../Loader";
 
 
 const CardsList: React.FC = () => {
@@ -43,7 +44,7 @@ const CardsList: React.FC = () => {
   return (
     <div>
       {error && <p>Error loading  data</p>}
-      {loading && <p>Loading ...</p>}
+      {loading && <Loader isLoading={true} height="40%" width="40%" />}
       <FiltersPanel
         onToggleFavorites={setShowFavorites}
         showFavorites={showFavorites}
