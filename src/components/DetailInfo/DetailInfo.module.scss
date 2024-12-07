@@ -1,0 +1,42 @@
+@use '@/assets/styles/variables' as *;
+@use '@/assets/styles/placeholder' as *;
+@use '@/assets/styles/mixins' as *;
+
+.detail {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: $white-color;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 0 auto;
+
+  &__title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: $primary-color;
+    margin-bottom: 10px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  &__info {
+    font-size: 0.9rem;
+    color: #444;
+    margin: 0.3rem 0;
+
+    b {
+      font-size: 1rem;
+    }
+  }
+
+  &__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+}

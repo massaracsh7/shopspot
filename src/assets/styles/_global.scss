@@ -1,0 +1,129 @@
+@use './variables' as *;
+@use './placeholder' as *;
+@use './mixins' as *;
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+ul,
+ol,
+button {
+  padding: 0;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  cursor: pointer;
+}
+
+input {
+  outline-color: transparent;
+  border: none;
+}
+
+button {
+  background-color: transparent;
+  outline-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+body {
+  background-color: $background-color;
+  color: $text-color;
+  @extend %font-primary;
+  @include font(1rem);
+}
+
+.container {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 15px;
+
+  @include media-laptop {
+    max-width: 960px;
+  }
+
+  @include media-tablet {
+    max-width: 720px;
+  }
+
+  @include media-mobile {
+    max-width: 100%;
+  }
+}
+
+.logo {
+  @extend %font-secondary;
+  @include font(2rem);
+  text-align: center;
+  text-shadow:
+    2px 2px 0px rgba(0, 0, 0, 0.3),
+    4px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+.title {
+  @include font(3rem, 1.6, 600);
+  color: $secondary-color;
+  margin-bottom: 20px;
+
+  @include media-laptop {
+    @include font(2.5rem);
+    margin-bottom: 16px;
+  }
+
+  @include media-tablet {
+    @include font(2rem);
+    margin-bottom: 12px;
+  }
+
+  @include media-mobile {
+    @include font(1.5rem);
+  }
+}

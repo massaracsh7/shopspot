@@ -1,0 +1,96 @@
+@use '@/assets/styles/variables' as *;
+@use '@/assets/styles/placeholder' as *;
+@use '@/assets/styles/mixins' as *;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: $light-bg;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  @include media-tablet {
+    padding: 1.5rem;
+  }
+
+  label {
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: $text-color;
+  }
+
+  &__error {
+    color: $error-color;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    transition:
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+
+    &:hover {
+      border-color: $primary-color;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 5px rgba($primary-color, 0.5);
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  select {
+    appearance: none;
+    background-color: $light-bg;
+    cursor: pointer;
+
+    &::-ms-expand {
+      display: none;
+    }
+  }
+
+  &__btn {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: $white-color;
+    background-color: $primary-color;
+    border: none;
+    border-radius: $border-radius;
+    cursor: pointer;
+    transition:
+      background-color 0.3s ease,
+      box-shadow 0.3s ease;
+
+    &:hover {
+      background-color: ($primary-color, 20%);
+      box-shadow: 0 2px 5px rgba($primary-color, 0.3);
+    }
+
+    &:disabled {
+      background-color: $disabled-bg;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+  }
+}

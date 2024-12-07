@@ -1,0 +1,5 @@
+@use '@/assets/styles/placeholder' as *;
+
+.linkBtn {
+  @extend %button-main;
+}
